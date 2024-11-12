@@ -26,14 +26,14 @@ function Navbar() {
               callbackUrl: '/'
             })
           }}>
-            Sign Out
+            Cerrar Sesión
           </button>
         </div>
       ) : (
         <button onClick={async () => {
           await signIn(null, { callbackUrl: '/dashboard' })
         }}>
-          Sign In
+          Iniciar Sesión
         </button>
       )}
     </nav>
