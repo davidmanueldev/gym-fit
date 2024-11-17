@@ -1,17 +1,23 @@
 import localFont from "next/font/local";
 import "./globals.css";
+//Fuentes
+import { Oswald, Roboto } from "next/font/google";
+// Componentes
 import Navbar from "@/components/Navbar";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { Providers } from "@/app/Providers";
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const oswald = Oswald({
+  subsets: ["latin"],
+  weight: ['200', '300', '400', '500', '600', '700'],
+  variable: "--font-oswald",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ['100', '300', '400', '500', '700', '900'],
+  variable: "--font-roboto",
 });
 
 export const metadata = {
@@ -21,12 +27,14 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="es" className="bg-gray-200">
+      <body className={`${oswald.variable} ${roboto.variable} max-w-[1920px] mx-auto bg-white`}>
+        <Header />
         <Providers>
           <Navbar />
           {children}
         </Providers>
+        <Footer />
       </body>
     </html>
   );
