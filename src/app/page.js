@@ -4,6 +4,7 @@ import BgImage from "../../public/assets/fondo.png"; // No funciona la importaci
 import Benefits from "@/components/Benefits";
 import Calculator from "@/components/Calculator";
 
+
 const bgStyle = {
   backgroundImage: `url(/assets/fondo.png)`,
   backgroundRepeat: "no-repeat",
@@ -17,7 +18,7 @@ function HomePage() {
     // <div>HomePage o sea el {"{"}children{"}"}</div>
     <div className="overflow-x-hidden">
       <div style={bgStyle}>
-        <Header />
+      <Header />
         <Hero />
       </div>
       <Benefits />

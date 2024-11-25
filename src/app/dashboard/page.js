@@ -1,7 +1,20 @@
-function DashboardPage() {
-  return (
-    <div>DashboardPage</div>
-  )
-}
+import Header from "@/components/Header";
 
-export default DashboardPage
+// function DashboardPage() {
+//   return (
+//     <Header />
+//   )
+// }
+
+// export default DashboardPage
+
+const DashboardPage = () => {
+  return (
+    <>
+      <Header />
+      <div>Hola</div>
+    </>
+  );
+};
+
+export default DashboardPage;

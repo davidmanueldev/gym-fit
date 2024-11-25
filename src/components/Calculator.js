@@ -118,7 +118,7 @@ const Calculator = () => {
   return (
     <div className="flex items-center justify-center min-h-screen">
       <div className="w-full max-w-md bg-white rounded-lg shadow-2xl p-6 text-center">
-        <h1 className="text-3xl font-bold text-gray-700 mb-6">Calcule su IMC</h1>
+        <h1 id="calculator" className="text-3xl font-bold text-gray-700 mb-6">Calcule su IMC</h1>
         <p className="font-medium font-roboto">Bienvenido, Ingrese sus datos para calcular su IMC <br /> (Índice de Masa Corporal)</p>
         <div className="space-y-4">
           <div className="bg-white shadow-md rounded-lg p-4">

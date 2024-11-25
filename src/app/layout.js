@@ -11,19 +11,19 @@ import Hero from "@/components/Hero";
 
 const oswald = Oswald({
   subsets: ["latin"],
-  weight: ['200', '300', '400', '500', '600', '700'],
+  weight: ["200", "300", "400", "500", "600", "700"],
   variable: "--font-oswald",
 });
 
 const roboto = Roboto({
   subsets: ["latin"],
-  weight: ['100', '300', '400', '500', '700', '900'],
+  weight: ["100", "300", "400", "500", "700", "900"],
   variable: "--font-roboto",
 });
 
 const playfair = Playfair({
   subsets: ["latin"],
-  weight: ['400', '700'],
+  weight: ["400", "700"],
   variable: "--font-playfair",
 });
 
@@ -35,11 +35,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="es" className="bg-gray-200">
-      <body className={`${oswald.variable} ${roboto.variable} ${playfair.variable} max-w-[1920px] mx-auto bg-white`}>
+      <body
+        className={`${oswald.variable} ${roboto.variable} ${playfair.variable} max-w-[1920px] mx-auto bg-white`}
+      >
         {/* <Header />
         <Hero /> */}
         <Providers>
           <Navbar />
+          {/* <Header /> */}
           {children}
         </Providers>
         <Footer />

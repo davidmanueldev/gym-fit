@@ -11,9 +11,6 @@ const Hero = () => {
         <div className="flex flex-col justify-center py-14 md:py-0 font-playfair">
           <div className="text-center md:text-left space-y-6">
             <h1
-              variants={SlideLeft(0.6)}
-              initial="hidden"
-              animate="visible"
               className="text-5xl lg:text-6xl font-bold leading-relaxed xl:leading-normal"
             >
               Transforma tu salud con un plan{" "}

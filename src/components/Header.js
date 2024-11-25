@@ -5,8 +5,14 @@ import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Fragment } from "react";
 import { FaDumbbel } from "react-icons/fa";
+import { signIn, signOut, useSession } from "next-auth/react";
+import Image from "next/image";
 
 const Header = () => {
+
+  const { data: session } = useSession();
+  console.log(session);
+
   return (
     <Popover className="container mx-auto flex items-center border-b-2 px-6 py-2 h-24">
       {/* <FaDumbbel /> */}
@@ -14,9 +20,14 @@ const Header = () => {
       <div className="grow">
         <div className="hidden sm:flex items-center justify-center gap-2 md:gap-8">
           <Link href="/">Inicio</Link>
-          <Link href="/about">Sobre Nosotros</Link>
-          <Link href="/services">Calculadora IMC</Link>
-          <Link href="/contact">Contacto</Link>
+          <Link href="/dashboard">Planes | Ejercicios</Link>
+          <Link href="#calculator">Calculadora IMC</Link>
+          <Link
+            href="https://www.linkedin.com/in/davidmanuel01/"
+            target="https://www.linkedin.com/in/davidmanuel01/"
+          >
+            Contacto
+          </Link>
         </div>
       </div>
 
@@ -39,7 +50,7 @@ const Header = () => {
       >
         <Popover.Panel
           focus
-          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition-all md:hidden"
+          className="absolute inset-x-0 top-0 origin-top-right transform p-2 transition-all md:hidden z-50"
         >
           <div className="rounded-lg bg-white shadow-lg ring-1 ring-black ring-opacity-5 divide-y-2 divide-gray-50">
             <div className="px-5 pb-6">
@@ -64,19 +75,20 @@ const Header = () => {
                   </Link>
                   <Link
                     className="focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 px-2"
-                    href="/about"
-                  >
-                    Sobre Nosotros
-                  </Link>
-                  <Link
-                    className="focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 px-2"
-                    href="/services"
+                    href="#calculator"
                   >
                     Calculadora IMC
                   </Link>
                   <Link
                     className="focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 px-2"
-                    href="/contact"
+                    href="/dashboard"
+                  >
+                    Planes/Ejercicios
+                  </Link>
+                  <Link
+                    className="focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500 px-2"
+                    href="https://www.linkedin.com/in/davidmanuel01/"
+                    target="_blank"
                   >
                     Contacto
                   </Link>
@@ -84,34 +96,62 @@ const Header = () => {
               </div>
 
               {/* Separacion */}
-              <div className="mt-6 flex flex-col items-center gap-2">
-                <Link
-                  href="/login"
-                  className="rounded-md bg-white px-4 py-2 text-sm font-medium text-black md:text-xl w-full border-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
-                >
-                  Iniciar Sesión
-                </Link>
-
-                <Link
-                  href="/register"
-                  className="rounded-md bg-white px-4 py-2 text-sm font-medium text-black md:text-xl w-full border-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
-                >
-                  Registrarse
-                </Link>
-              </div>
+              {session?.user ? (
+                <div className="mt-6 flex flex-col items-center gap-2">
+                  <img src={session.user.image} />
+                  <button
+                    onClick={async () => {
+                      await signOut({
+                        callbackUrl: "/",
+                      });
+                    }}
+                    className="rounded-md bg-white px-4 py-2 text-sm font-medium text-black md:text-xl w-full border-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+                  >
+                    Cerrar Sesión
+                  </button>
+                </div>
+              ) : (
+                <div className="mt-6 flex flex-col items-center gap-2">
+                  <button
+                    onClick={async () => {
+                      await signIn(null, { callbackUrl: "/dashboard" });
+                    }}
+                    className="rounded-md bg-white px-4 py-2 text-sm font-medium text-black md:text-xl w-full border-2 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-gray-500"
+                  >
+                    Iniciar Sesión
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </Popover.Panel>
       </Transition>
-
-      <div className="hidden sm:block">
-        <Link href="/login" className="font-bold border-2 rounded-full px-4 py-2 hover:bg-gray-100 transition-all">
-          Iniciar Sesión
-        </Link>
-        {/* <Link href="/register" className="font-bold">
-          Registrarse
-        </Link> */}
+      
+      {session?.user ? (
+      <div className="hidden sm:block xl:flex items-center gap-2">
+        <img src={session.user.image} alt="img de perfil" className="w-10 h-10 rounded-full cursor-pointer" />
+        <button onClick={async () => {
+          await signOut({
+            callbackUrl: '/'
+          })
+        }}
+          className="font-bold border-2 rounded-full px-4 py-2 hover:bg-gray-100 transition-all"
+        >
+          Cerrar Sesión
+        </button>
       </div>
+      ) : (
+      <div className="hidden sm:block">
+        <button onClick={async () => {
+          await signIn(null, { callbackUrl: '/dashboard' })
+        }}
+          href="/dashboard"
+          className="font-bold border-2 rounded-full px-4 py-2 hover:bg-gray-100 transition-all"
+        >
+          Iniciar Sesión
+        </button>
+      </div>
+      )}
     </Popover>
   );
 };
