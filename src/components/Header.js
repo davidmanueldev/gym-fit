@@ -4,10 +4,12 @@ import Link from "next/link";
 import { Popover, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/solid";
 import { Fragment } from "react";
+import { FaDumbbel } from "react-icons/fa";
 
 const Header = () => {
   return (
     <Popover className="container mx-auto flex items-center border-b-2 px-6 py-2 h-24">
+      {/* <FaDumbbel /> */}
       <h1 className="font-bold">Gym Fit</h1>
       <div className="grow">
         <div className="hidden sm:flex items-center justify-center gap-2 md:gap-8">
