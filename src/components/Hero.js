@@ -16,14 +16,13 @@ const Hero = () => {
               animate="visible"
               className="text-5xl lg:text-6xl font-bold leading-relaxed xl:leading-normal"
             >
-              Los buenos hábitos son cheveres pa que quedes{" "}
-              <span className="text-primary">chochito</span>
+              Transforma tu salud con un plan{" "}
+              <span className="text-primary"> personalizado</span>
             </h1>
             <p className="text-gray-600 xl:max-w-[500px]">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. In quos
-              illo possimus vero facilis odit nulla eligendi? Eum amet
-              obcaecati, molestiae provident sapiente, consectetur fugiat ut,
-              minima repudiandae doloremque delectus.
+              Calcula tu IMC, regístrate y empieza a recibir rutinas de
+              ejercicio y planes de alimentación adaptados a tus metas para
+              mejorar tu bienestar de manera simple y efectiva.
             </p>
             {/* Button Section */}
             <div className="flex justify-center items-center gap-8 md:justify-start !mt-4">

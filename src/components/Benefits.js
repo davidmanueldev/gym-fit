@@ -1,31 +1,34 @@
 import { GrYoga } from "react-icons/gr";
 import { FaDumbbell } from "react-icons/fa6";
 import { GiGymBag } from "react-icons/gi";
+import { FaAppleAlt, FaUserPlus } from "react-icons/fa";
+import { FaWeightScale } from "react-icons/fa6";
 import { delay } from "framer-motion";
 
 const EquipmentData = [
   {
     id: 1,
-    title: "Yoga Training",
-    desc: "We provide all the necessary equipments for yoga.",
-    icon: <GrYoga />,
+    title: "Calcula tu IMC",
+    desc: "Calcula tu Índice de Masa Corporal (IMC) para conocer tu estado físico y guiarte en tu camino hacia la salud.",
+    icon: <FaWeightScale />,
     delay: 0.3,
   },
   {
     id: 2,
-    title: "Muscles Training",
-    desc: "We provide all the necessary equipments for muscles training.",
-    icon: <FaDumbbell />,
-    delay: 0.6,
-  },
-  {
-    id: 3,
-    title: "Fitness Routine",
-    desc: "We provide all the necessary equipments for fitness routine.",
+    title: "Rutinas",
+    desc: "Accede a rutinas de ejercicio adaptadas a tus objetivos de salud y bienestar.",
     icon: <GiGymBag />,
     delay: 0.9,
   },
+  {
+    id: 3,
+    title: "Plan de Comida",
+    desc: "Recibe planes de alimentación diseñados específicamente para ayudarte a alcanzar tus metas de salud.",
+    icon: <FaAppleAlt />,
+    delay: 1.2,
+  },
 ];
+
 
 const Benefits = () => {
   return (

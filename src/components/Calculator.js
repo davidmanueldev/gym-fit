@@ -1,61 +1,4 @@
-// const Calculator = () => {
-//   return (
-//     <div class="container">
-//         <div class="box">
-//           <h1>BMI Calculator</h1>
-//           <div class="content">
-
-
-//             <div class="input">
-//                 <label for="height">Age</label>
-//                 <input type="text" class="text-input" id="age" autocomplete="off" required/>
-//             </div>
-
-//             <div class="gender">
-
-//                 <label class="container">
-//                     <input type="radio" name="radio" id="m"><p class="text">Male</p>
-//                     <span class="checkmark"></span>
-//                   </label>
-
-
-//                 <label class="container">
-//                     <input type="radio" name="radio" id="f" ><p class="text">Female</p>
-//                       <span class="checkmark"></span>
-//                     </label>
-
-//             </div>
-
-//             <div class="containerHW">
-//             <div class="inputH">
-//               <label for="height">Height(cm)</label>
-//               <input type="number" id="height" required>
-//             </div>
-
-//             <div class="inputW">
-//               <label for="weight">Weight(kg)</label>
-//               <input type="number" id="weight" required>
-//             </div>
-//           </div>
-
-//             <button class="calculate" id="submit" onclick="calculate();">Calculate BMI</button>
-//           </div>
-//           <div class="result">
-//             <p>Your BMI is</p>
-//             <div id="result">00.00</div>
-//             <p class="comment"></p>
-//           </div>
-//           <div class="footer"><a class="footer-text" target="_blank" href="https://myskypower.net/">By My Sky Power</a></div>
-        
-      
-
-//         </div>
-//       </div>
-//   );
-// };
-
-// export default Calculator;
-'use client';
+"use client";
 
 import { useState } from "react";
 
@@ -71,7 +14,7 @@ const Calculator = () => {
 
   const calculate = () => {
     if (!age || !height || !weight || !gender) {
-      setModalText("All fields are required!");
+      setModalText("Todos los campos son requeridos!");
       setModalVisible(true);
     } else {
       countBmi();
@@ -79,15 +22,12 @@ const Calculator = () => {
   };
 
   const countBmi = () => {
-    // Convertir altura de centímetros a metros
-    const heightInMeters = height / 100;
-    // Calcular el IMC
-    const bmiValue = (weight / (heightInMeters * heightInMeters)).toFixed(2);
-    // Establecer el valor calculado del IMC
+    const heightInMeters = height / 100; // Convertir altura de centímetros a metros
+    const bmiValue = (weight / (heightInMeters * heightInMeters)).toFixed(2); // Calcular el IMC
     setBmi(bmiValue);
-    
+
     let result = "";
-  
+
     // Caso para menores de 18 años (niños y adolescentes)
     if (age < 18) {
       result = interpretChildBmi(bmiValue, age, gender);
@@ -95,14 +35,13 @@ const Calculator = () => {
       // Caso para adultos y ancianos
       result = interpretAdultBmi(bmiValue, age);
     }
-  
+
     // Establecer el comentario con el resultado
-    setComment(result);
+    setComment(result); // Cambié el nombre de setComment a updateComment
   };
-  
+
   // Función para interpretar el IMC en adultos
   const interpretAdultBmi = (bmiValue, age) => {
-    // Para personas menores de 60 años, seguimos los rangos estándar de la OMS.
     if (age < 60) {
       if (bmiValue < 18.5) {
         return "Bajo Peso";
@@ -117,9 +56,7 @@ const Calculator = () => {
       } else {
         return "Obesidad de clase III";
       }
-    }
-    // Para adultos mayores (60 años o más), se ajustan los rangos para evitar sobrevaloración del IMC
-    else {
+    } else {
       if (bmiValue < 21.9) {
         return "Bajo Peso";
       } else if (bmiValue >= 22 && bmiValue < 27) {
@@ -131,14 +68,13 @@ const Calculator = () => {
       }
     }
   };
-  
-  // Función para interpretar el IMC en niños y adolescentes (basado en percentiles)
+
+  // Función para interpretar el IMC en niños y adolescentes de 2 a 5 años
   const interpretChildBmi = (bmiValue, age, gender) => {
     if (age < 2) {
       return "IMC no aplicable para menores de 2 años";
     }
-  
-    // Para niños de 2 a 5 años, usar un rango simplificado
+
     if (age >= 2 && age <= 5) {
       if (bmiValue < 14) {
         return "Bajo Peso";
@@ -150,11 +86,9 @@ const Calculator = () => {
         return "Obesidad";
       }
     }
-  
-    // Para niños y adolescentes de 6 a 17 años, ajustar por percentiles de género
+
     if (age >= 6 && age <= 17) {
-      if (gender === 'male') {
-        // Rango simplificado de percentiles para niños (hombres) de 6 a 17 años
+      if (gender === "male") {
         if (bmiValue < 10) {
           return "Bajo Peso (percentil muy bajo)";
         } else if (bmiValue >= 10 && bmiValue < 85) {
@@ -164,8 +98,7 @@ const Calculator = () => {
         } else {
           return "Obesidad";
         }
-      } else if (gender === 'female') {
-        // Rango simplificado de percentiles para niñas (mujeres) de 6 a 17 años
+      } else if (gender === "female") {
         if (bmiValue < 10) {
           return "Bajo Peso (percentil muy bajo)";
         } else if (bmiValue >= 10 && bmiValue < 85) {
@@ -177,28 +110,31 @@ const Calculator = () => {
         }
       }
     }
-  
+
     // Si el niño tiene más de 17 años, se interpreta como adulto
     return interpretAdultBmi(bmiValue, age);
   };
-  
-
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-blue-500">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-lg p-6 text-center">
+    <div className="flex items-center justify-center min-h-screen">
+      <div className="w-full max-w-md bg-white rounded-lg shadow-2xl p-6 text-center">
         <h1 className="text-3xl font-bold text-gray-700 mb-6">Calcule su IMC</h1>
+        <p className="font-medium font-roboto">Bienvenido, Ingrese sus datos para calcular su IMC <br /> (Índice de Masa Corporal)</p>
         <div className="space-y-4">
           <div className="bg-white shadow-md rounded-lg p-4">
-            <label htmlFor="age" className="block text-lg font-semibold text-gray-700 mb-2">Ingrese su edad</label>
+            <label
+              htmlFor="age"
+              className="block text-lg font-semibold text-gray-700 mb-2"
+            >
+              Ingrese su edad
+            </label>
             <input
               type="text"
               className="w-full border-b-2 border-blue-500 text-center text-xl focus:outline-none"
               id="age"
-              autoComplete="off"
-              required
               value={age}
               onChange={(e) => setAge(e.target.value)}
+              required
             />
           </div>
 
@@ -207,58 +143,61 @@ const Calculator = () => {
               <input
                 type="radio"
                 name="radio-4"
-                className="radio checked:border-yellow-500 checked:bg-yellow-500"
                 checked={gender === "male"}
                 onChange={() => setGender("male")}
               />
-              <span className="label cursor-pointer">
-                <span className="label-text text-base">Masculino</span>
-              </span>
+              <span className="label text-base">Masculino</span>
             </label>
 
             <label className="form-control flex items-center gap-1">
               <input
                 type="radio"
                 name="radio-4"
-                className="radio checked:border-purple-500 checked:bg-purple-500"
                 checked={gender === "female"}
                 onChange={() => setGender("female")}
               />
-              <span className="label cursor-pointer">
-                <span className="label-text text-base">Femenino</span>
-              </span>
+              <span className="label text-base">Femenino</span>
             </label>
           </div>
 
           <div className="flex justify-around items-center">
             <div className="bg-white shadow-md rounded-lg p-4 mr-4">
-              <label htmlFor="height" className="block text-lg font-semibold text-gray-700 mb-2">Altura (cm)</label>
+              <label
+                htmlFor="height"
+                className="block text-lg font-semibold text-gray-700 mb-2"
+              >
+                Altura (cm)
+              </label>
               <input
                 type="number"
                 className="w-full border-b-2 border-blue-500 text-center text-xl focus:outline-none"
                 id="height"
-                required
                 value={height}
                 onChange={(e) => setHeight(e.target.value)}
+                required
               />
             </div>
 
             <div className="bg-white shadow-md rounded-lg p-4">
-              <label htmlFor="weight" className="block text-lg font-semibold text-gray-700 mb-2">Peso (kg)</label>
+              <label
+                htmlFor="weight"
+                className="block text-lg font-semibold text-gray-700 mb-2"
+              >
+                Peso (kg)
+              </label>
               <input
                 type="number"
                 className="w-full border-b-2 border-blue-500 text-center text-xl focus:outline-none"
                 id="weight"
-                required
                 value={weight}
                 onChange={(e) => setWeight(e.target.value)}
+                required
               />
             </div>
           </div>
 
           <button
             className="w-full bg-blue-500 text-white font-semibold py-3 rounded-lg hover:bg-blue-600 transition duration-300"
-            id="submit"
             onClick={calculate}
           >
             Calcular IMC
@@ -266,28 +205,30 @@ const Calculator = () => {
         </div>
         <div className="mt-6">
           <p className="text-lg font-semibold text-gray-700">Su IMC es:</p>
-          <div className="text-3xl font-bold text-blue-500 bg-gray-200 inline-block py-2 px-4 rounded-full mt-2">{bmi}</div>
-          <p className="rounded-full border-4 p-2 border-dashed border-indigo-300 bg-indigo-100 text-lg font-semibold text-gray-700 mt-4">{comment}</p>
-        </div>
-        <div className="mt-6">
-          <a className="text-gray-600 text-sm" target="_blank" href="https://www.who.int/es/news-room/fact-sheets/detail/obesity-and-overweight">
-            Información proporcionada por Organización Mundial de la Salud
-          </a>
-        </div>
-      </div>
-
-      {modalVisible && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
-            <span className="text-gray-700 text-2xl font-bold cursor-pointer float-right" onClick={() => setModalVisible(false)}>
-              &times;
-            </span>
-            <p className="text-gray-700 text-lg mt-4">{modalText}</p>
+          <div className="text-3xl font-bold text-blue-500 bg-gray-200 inline-block py-2 px-4 rounded-full mt-2">
+            {bmi}
           </div>
+          <p className="rounded-full border-4 p-2 border-dashed border-indigo-300 bg-indigo-100 text-lg font-semibold text-gray-700 mt-4">
+            {comment}
+          </p>
         </div>
-      )}
+
+        {modalVisible && (
+          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
+              <span
+                className="text-gray-700 text-2xl font-bold cursor-pointer float-right"
+                onClick={() => setModalVisible(false)}
+              >
+                &times;
+              </span>
+              <p className="text-gray-700 text-lg mt-4">{modalText}</p>
+            </div>
+          </div>
+        )}
+      </div>
     </div>
   );
 };
 
-export default Calculator;
+export default Calculator
