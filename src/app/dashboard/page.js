@@ -72,6 +72,26 @@ const DashboardPage = () => {
           "Preferir proteínas magras (pavo, pescado, legumbres)",
           "Meriendas saludables planificadas (frutos secos, batidos verdes)"
         ]
+      },
+      supplements: {
+        underweight: [
+          "Proteína en polvo (suero de leche, caseína)",
+          "Creatina monohidratada para mejorar la fuerza y ganar masa muscular",
+          "Multivitamínicos para cubrir deficiencias nutricionales",
+          "Ácidos grasos omega-3 (aceite de pescado) para la salud cardiovascular"
+        ],
+        normal: [
+          "Proteína en polvo (si no se alcanzan los requerimientos de proteína)",
+          "Creatina para mejorar la fuerza y resistencia",
+          "Omega-3 para mejorar la salud cognitiva y cardiovascular",
+          "Multivitamínicos de alta calidad para un soporte general"
+        ],
+        overweight: [
+          "Proteína en polvo baja en calorías para mejorar la saciedad",
+          "L-carnitina para apoyar la quema de grasa",
+          "Multivitamínicos para prevenir deficiencias nutricionales",
+          "Fibra adicional (psyllium, semillas de chía) para mejorar la digestión"
+        ]
       }
     },
     young: {
@@ -123,6 +143,26 @@ const DashboardPage = () => {
           "Incrementar fibra dietética (verduras, legumbres, avena)",
           "Controlar tamaño de porciones y realizar comidas frecuentes"
         ]
+      },
+      supplements: {
+        underweight: [
+          "Proteína en polvo (suero de leche, caseína)",
+          "Creatina monohidratada para aumentar masa muscular",
+          "Multivitamínicos para cubrir deficiencias nutricionales",
+          "Ácidos grasos omega-3 (aceite de pescado) para la salud cardiovascular"
+        ],
+        normal: [
+          "Proteína en polvo (si no se alcanzan los requerimientos de proteína)",
+          "Creatina para aumentar el rendimiento en entrenamientos de fuerza",
+          "Multivitamínicos para una salud general",
+          "Omega-3 para mejorar la salud cerebral y cardiovascular"
+        ],
+        overweight: [
+          "Proteína en polvo baja en calorías para ayudar a la saciedad",
+          "L-carnitina para ayudar a la quema de grasa",
+          "Fibra adicional (psyllium, semillas de chía) para la digestión",
+          "Multivitamínicos para evitar deficiencias nutricionales"
+        ]
       }
     }
   };
@@ -143,10 +183,12 @@ const DashboardPage = () => {
 
     const routineRecs = recommendationData[ageGroup].routine[activityLevel];
     const nutritionRecs = recommendationData[ageGroup].nutrition[imcCategory];
+    const supplementsRecs = recommendationData[ageGroup].supplements[imcCategory];
 
     setRecommendations({
       routine: routineRecs,
-      nutrition: nutritionRecs
+      nutrition: nutritionRecs,
+      supplements: supplementsRecs
     });
   };
 
@@ -245,6 +287,17 @@ const DashboardPage = () => {
                     <li key={index} className="flex items-start gap-2 mb-2">
                       <span>🍎</span>
                       {nutrient}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="recommendation-card p-6 bg-gray-100 rounded-lg border-l-4 border-blue-500">
+                <h3 className="text-xl font-semibold text-blue-600 mb-4"><i className="fas fa-capsules"></i> Suplementos Recomendados</h3>
+                <ul>
+                  {recommendations.supplements.map((supplement, index) => (
+                    <li key={index} className="flex items-start gap-2 mb-2">
+                      <span>💊</span>
+                      {supplement}
                     </li>
                   ))}
                 </ul>
