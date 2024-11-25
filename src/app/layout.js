@@ -41,7 +41,7 @@ export default function RootLayout({ children }) {
         {/* <Header />
         <Hero /> */}
         <Providers>
-          <Navbar />
+          {/* <Navbar /> */}
           {/* <Header /> */}
           {children}
         </Providers>
